@@ -1,33 +1,35 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+
 import Squares from "./Square";
 import calculateWinner from "../utils/calculateWinner";
 
-const Board = () => {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [isNext, setIsNext] = useState(true);
+const Board = ({ isNext, squares, onPlay }) => {
   const winner = calculateWinner(squares);
   let status;
 
   if (winner) {
     status = `Winner: ${winner}`;
   } else {
-    status = `Next Player ${isNext ? "X" : "O"}`;
+    status = `Next Player: ${isNext ? "X" : "O"}`;
   }
 
   const handleClick = (i) => {
     if (squares[i] || winner) {
       return;
     }
+
+    if (!squares[i] || !winner) {
+      status = "None can win";
+    }
+
     const nextSquares = squares.slice();
     if (isNext) {
       nextSquares[i] = "X";
     } else {
       nextSquares[i] = "O";
     }
-
-    setSquares(nextSquares);
-    setIsNext(!isNext);
+    onPlay(nextSquares);
   };
 
   return (

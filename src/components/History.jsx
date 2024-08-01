@@ -1,7 +1,8 @@
-const History = () => {
+/* eslint-disable react/prop-types */
+const History = ({ moves }) => {
   return (
     <div>
-      <h1>I am moving History. that will see you later</h1>
+      <ol>{moves}</ol>
     </div>
   );
 };
