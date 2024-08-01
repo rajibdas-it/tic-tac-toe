@@ -7,6 +7,9 @@ const Board = () => {
   const [isNext, setIsNext] = useState(true);
 
   const handleClick = (i) => {
+    if (squares[i]) {
+      return;
+    }
     const nextSquares = squares.slice();
     if (isNext) {
       nextSquares[i] = "X";
