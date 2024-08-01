@@ -3,7 +3,7 @@ import History from "./History";
 
 const Game = () => {
   return (
-    <div>
+    <div className="flex gap-10">
       <Board />
       <History />
     </div>
