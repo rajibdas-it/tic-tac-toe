@@ -4,12 +4,18 @@ import Squares from "./Square";
 
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
+  const [isNext, setIsNext] = useState(true);
 
   const handleClick = (i) => {
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+    if (isNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
 
     setSquares(nextSquares);
+    setIsNext(!isNext);
   };
 
   return (
