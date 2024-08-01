@@ -1,13 +1,22 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import Squares from "./Square";
+import calculateWinner from "../utils/calculateWinner";
 
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [isNext, setIsNext] = useState(true);
+  const winner = calculateWinner(squares);
+  let status;
+
+  if (winner) {
+    status = `Winner: ${winner}`;
+  } else {
+    status = `Next Player ${isNext ? "X" : "O"}`;
+  }
 
   const handleClick = (i) => {
-    if (squares[i]) {
+    if (squares[i] || winner) {
       return;
     }
     const nextSquares = squares.slice();
@@ -23,7 +32,7 @@ const Board = () => {
 
   return (
     <div>
-      <h1>This is Board. Square stay inside me.</h1>
+      <div>{status}</div>
       <div className="flex">
         <Squares value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Squares value={squares[1]} onSquareClick={() => handleClick(1)} />
